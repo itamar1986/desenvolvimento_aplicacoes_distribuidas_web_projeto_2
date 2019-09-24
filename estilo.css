@@ -1,0 +1,10 @@
+h2 {
+	text-decoration : underline; text-align : center;
+}
+body {
+    background-color: #38a027;
+    min-width: 768px;
+}
+form {
+    width: 900px;
+}

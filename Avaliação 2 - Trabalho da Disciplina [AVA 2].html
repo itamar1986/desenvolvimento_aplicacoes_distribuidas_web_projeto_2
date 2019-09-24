@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta content="text/html; charset="utf-8">
+		<title>Cadastramento dos dados</title>
+		<link rel="stylesheet" type="text/css" href="estilo.css">
+	</head>
+	<body>
+		<img src="imagens/salvador.jpg" alt="salvador" width=975 height=300>
+		<form name="formulario" method="post">
+		<table border="1">
+			<tr>
+				<th colspan="8" ><h2>Cadastramento de dados básicos dos usuários de Salvador - Bahia</h2></th>
+			</tr>
+			<tr>
+				<td colspan="8" align="center"><h4>Preencha esses dados</h4></td>
+			</tr>
+			<tr>
+				<td align="right">Nome Completo:</td>
+				<td align="left" colspan="6"><input type="text" size="100" name="nome" maxlength="70" ></td>
+			</tr>
+			<tr>
+				<td align="right">E-mail:</td>
+				<td align="left" colspan="6"><input type="email" size="50" name="email"  autocomplete="on" placeholder="seuemail@hotmail.com"></td>
+			</tr>
+			<tr>
+				<td align="right">Data de nascimento:</td>
+				<td align="left" colspan="6"><input size="3" name="dia" oninput="testaDia()" maxlength="2">/<input size="3" name="mes" oninput="testaMes()" maxlength="2">/<input size="3" name="ano" maxlength="4">
+			</tr>
+			<tr>
+				<td align="right">Sexo:</td>
+				<td align="center" colspan="3"><input type="radio" name="sexo" value="f"> Feminino</td>
+				<td align="center" colspan="3"><input type="radio" name="sexo" value="m"> Masculino</td>
+			</tr>
+			<tr>
+				<td align="right">Estado Civil:</td>
+				<td align="center" colspan="2"><input type="radio" name="estado" onClick="verifica(0)" value="f"> Solteiro(a)</td>
+				<td align="center" colspan="2"><input type="radio" name="estado" onClick="verifica(1)" value="m"> Casado(a)</td>
+				<td align="center" colspan="2"><input type="radio" name="estado" onClick="verifica(2)" value="o"> Outros</td>
+			</tr>
+				<tr>
+				<td align="right">Áreas de interesse</td>
+				<td align="center" colspan="6">
+				<input type="checkbox" name="ana" value="i">Análise<br>
+				<input type="checkbox" name="ban" value="b">Banco de dados<br>
+				<input type="checkbox" name="des" value="p">Desenvolvimento <br>
+				<input type="checkbox" name="eng" value="p">Engenharia de software<br>
+				<input type="checkbox" name="red" value="p">Redes de computadores
+				</td>
+			<tr>
+				<td colspan="4" align="center"><input onClick="validar()" name="botao" type="button" value="Enviar"></td>
+				<td colspan="4" align="center"><input type="reset" value="Limpar"></td>
+			</tr>
+		</form>
+		<script Language="JavaScript" type="text/javascript">
+		<!--
+		var validaEstado=false;
+		function validar(){
+			var nome=document.formulario.nome.value;
+			var email=document.formulario.email.value;
+			var dia=document.formulario.dia.value;
+			var mes=document.formulario.mes.value;
+			var ano=document.formulario.ano.value;
+			var validaNome=false;
+			var validaEmail=false;
+			var validaData=false;
+			if(nome =="") {
+				alert("O campo nome está vazio!");
+				document.formulario.nome.focus();
+				return false;
+			}
+			if(nome.length < 15) {
+				alert("O seu nome deve possuir mais de 15 caracteres")
+				document.formulario.nome.focus();
+				return false;
+			}
+			if(isNaN(nome)== false) {
+				alert("Digite um nome, você digitou um número!");
+				document.formulario.nome.focus();
+				return false;
+			}
+			if(isNaN(nome)== true) {
+				validaNome=true;
+			}
+			if(email.indexOf("@")>0 && email.indexOf(".")>0 &&email.length>10){
+				validaEmail=true;
+			}
+			else{
+				alert("Favor verificar o E-mail");
+				document.formulario.email.focus();
+				return false;
+			}
+			if(dia=="" || mes=="" || ano=="") {
+				alert("Algum campo da data está vazio!");
+				document.formulario.dia.focus();
+				return false;
+			}
+			if(isNaN(dia)==true || isNaN(mes)==true || isNaN(ano)== true) {
+				alert("Digite somente números nos campos da data!");
+				document.formulario.dia.focus();
+				return false;
+			}
+			if(isNaN(dia)==false && isNaN(mes)==false && isNaN(ano)==false) {
+				validaData=true;
+			}
+			if(document.formulario.sexo[0].checked==false && document.formulario.sexo[1].checked==false) {
+				alert("Você deve escolher uma opção de sexo!");
+				return false;
+			}
+			if(document.formulario.estado[0].checked==false && document.formulario.estado[1].checked==false && document.formulario.estado[2].checked==false) {
+				alert("Você deve escolher uma opção de estado civil!");
+				validaEstado=false;
+				return false;
+			}
+			if(document.formulario.ana.checked==false && document.formulario.ban.checked==false && document.formulario.des.checked==false && document.formulario.eng.checked==false && document.formulario.red.checked==false){
+				alert("Você deve escolher pelo menos uma área de interesse!");
+				return false;
+			}
+			if(validaNome==true && validaEmail==true && validaData==true && validaEstado==true) {
+				alert("Parabéns " + nome + ", seus dados foram enviados com sucesso!");
+				return true;
+			}
+		}
+		
+		function testaDia(){
+			var dia=document.formulario.dia.value;
+			if(isNaN(dia)==false && dia.length == 2 && dia >= 1 && dia <=31){
+				document.formulario.mes.focus();
+			}
+			else {
+				document.formulario.dia.focus();
+				if(isNaN(dia)==false && dia.length == 2){
+					alert("O dia deve estar entre 01 e 31");
+				}
+			}
+		}
+		
+		function testaMes(){
+			var mes=document.formulario.mes.value;
+			if(isNaN(mes)==false && mes.length == 2 && mes >= 1 && mes <=12){
+				document.formulario.ano.focus();
+			}
+			else {
+				document.formulario.mes.focus();
+				if(isNaN(mes)==false && mes.length == 2){
+					alert("O mês deve estar entre 01 e 12");
+				}
+			}
+		}
+		
+		function verifica(escolha){
+			var estadoCivil=escolha;
+			var ano=document.formulario.ano.value;
+			if(estadoCivil==0){
+				if(2019-ano <= 15) {
+					alert("Se solteiro, deve ter mais de 15 anos!");
+					validaEstado=false;
+					return false;
+				}
+				else {
+					validaEstado=true;
+				}
+			}
+			else {
+				validaEstado=true;
+			}
+		}
+		-->
+		</script>
+	</body>
+</html>
+
